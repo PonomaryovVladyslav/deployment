@@ -19,7 +19,7 @@ class Item(models.Model):
 
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
-    item = models.ForeignKey(Item, on_delete=models.DO_NOTHING, related_name='item')
+    item = models.ForeignKey(Item, on_delete=models.DO_NOTHING, related_name='orders')
     create_date = models.DateTimeField(auto_now_add=True)
     amount = models.IntegerField(default=1)
 
@@ -33,7 +33,17 @@ class Refund(models.Model):
     crate_date = models.DateTimeField(auto_now_add=True)
 
 
+class Type(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 
+class Test(models.Model):
+    count = models.IntegerField()
+    date = models.DateTimeField(auto_now=True)
+    type = models.ForeignKey(Type, on_delete=models.CASCADE, null=True, blank=True)
 
-
+    def __str__(self):
+        return f'type - {self.type}, count - {self.count}'

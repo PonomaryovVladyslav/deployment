@@ -1,12 +1,17 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
+
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.response import Response
+
+from Model4.settings import TIME_TO_LIVE
 from .models import User, Item, Order, Refund
 from .forms import UserCreateForm, OrderCreateForm, RefundCreateForm
 
@@ -184,3 +189,15 @@ class ManageRefundView(DeleteView, MyLoginRequiredMixin):
             order.delete()
         refund.delete()
         return HttpResponseRedirect(self.success_url)
+
+
+class MyTokenView(ObtainAuthToken):
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        if (timezone.now() - token.created) > timedelta(minutes=TIME_TO_LIVE):
+            token.delete()
+            token = Token.objects.create(user=user)
+        return Response({'token': token.key})
