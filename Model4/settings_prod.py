@@ -1,6 +1,6 @@
 import os
 DEBUG = False
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['54.202.36.120']
 
 DATABASES = {
     'default': {
