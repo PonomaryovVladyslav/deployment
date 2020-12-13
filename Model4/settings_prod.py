@@ -1,8 +1,8 @@
 import os
 from .settings import INSTALLED_APPS
 
-# DEBUG = False
-# ALLOWED_HOSTS = ['54.202.36.120']
+DEBUG = False
+ALLOWED_HOSTS = ['54.186.155.252']
 
 DATABASES = {
     'default': {
