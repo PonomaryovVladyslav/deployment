@@ -114,29 +114,14 @@ REST_FRAMEWORK = {
 TIME_TO_LIVE = 1
 
 
-# DEBUG = False
-ALLOWED_HOSTS = ['54.186.155.252']
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DBNAME'),
-        'USER': os.environ.get('DBUSER'),
-        'PASSWORD': os.environ.get('DBPASS'),
-        'HOST': os.environ.get('DBHOST', '127.0.0.1'),
-        'PORT': os.environ.get('DBPORT', '5432'),
-    }
-}
-print('IN_settings_prod')
-#
-# print(os.environ.get('PROD'))
-# if os.environ.get('PROD'):
-#     try:
-#         from .settings_prod import *
-#     except ImportError:
-#         pass
-# else:
-#     try:
-#         from .settings_local import *
-#     except ImportError:
-#         pass
+print(os.environ.get('PROD'))
+if os.environ.get('PROD'):
+    try:
+        from .settings_prod import *
+    except ImportError:
+        pass
+else:
+    try:
+        from .settings_local import *
+    except ImportError:
+        pass
