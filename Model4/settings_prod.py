@@ -14,6 +14,7 @@ DATABASES = {
         'PORT': os.environ.get('DBPORT', '5432'),
     }
 }
+print('IN_settings_prod')
 #
 # INSTALLED_APPS.append('storages')
 #
