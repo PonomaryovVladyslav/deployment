@@ -113,8 +113,6 @@ REST_FRAMEWORK = {
 
 TIME_TO_LIVE = 1
 
-
-print(os.environ.get('PROD'))
 if os.environ.get('PROD'):
     try:
         from .settings_prod import *
