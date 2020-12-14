@@ -1,20 +1,20 @@
 import os
 from .settings import INSTALLED_APPS
-
-DEBUG = False
-ALLOWED_HOSTS = ['54.186.155.252']
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DBNAME'),
-        'USER': os.environ.get('DBUSER'),
-        'PASSWORD': os.environ.get('DBPASS'),
-        'HOST': os.environ.get('DBHOST', '127.0.0.1'),
-        'PORT': os.environ.get('DBPORT', '5432'),
-    }
-}
-print('IN_settings_prod')
+#
+# DEBUG = False
+# ALLOWED_HOSTS = ['54.186.155.252']
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': os.environ.get('DBNAME'),
+#         'USER': os.environ.get('DBUSER'),
+#         'PASSWORD': os.environ.get('DBPASS'),
+#         'HOST': os.environ.get('DBHOST', '127.0.0.1'),
+#         'PORT': os.environ.get('DBPORT', '5432'),
+#     }
+# }
+# print('IN_settings_prod')
 #
 # INSTALLED_APPS.append('storages')
 #
